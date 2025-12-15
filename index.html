@@ -1,11 +1,26 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Punto de entrada app</title>
-</head>
-<body>
-    
-</body>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>AppCultural</title>
+        <meta name="robots" content="noindex">
+        <!-- Evita parpadeo: redirige lo antes posible -->
+        <script>
+            const HOME = "/monumentos/html/mapa.html";
+            location.replace(HOME);
+        </script>
+        <noscript>
+            <!-- Fallback accesible si JS está desactivado -->
+            <meta http-equiv="refresh" content="0; url=/monumentos/html/mapa.html">
+        </noscript>
+        <style>
+            /* Minipantalla de carga por si tarda un instante */
+            html,body{height:100%;margin:0;font-family:system-ui}
+            .center{height:100%;display:grid;place-items:center}
+        </style>
+    </head>
+    <body>
+        <div class="center">Cargando…</div>
+    </body>
 </html>
