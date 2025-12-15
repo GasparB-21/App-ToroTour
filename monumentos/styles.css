@@ -63,6 +63,37 @@
   transition: transform .18s ease;
 }
 
+.map-fab__locate{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, calc(-50% + 72px));
+  inline-size: 52px;
+  block-size: 52px;
+  border-radius: 50%;
+  border: 2px solid var(--ui-black);
+  background: var(--white-color);
+  display: grid;
+  place-items: center;
+  box-shadow: 0 2px 6px rgba(0,0,0,.18);
+  cursor: pointer;
+  transition: opacity .18s ease;
+}
+.map-fab__locate::before{
+  content:"";
+  width: 20px;
+  height: 20px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23007aff' d='m3 10.5 17-6.5-6.5 17-2-7z'/%3E%3C/svg%3E") center/contain no-repeat;
+}
+.map-fab__locate:disabled{
+  opacity: .4;
+  cursor: not-allowed;
+}
+.map-fab--open .map-fab__locate{
+  opacity: 0;
+  pointer-events: none;
+}
+
 .map-fab--open .map-fab__btn{
   opacity: 1;
   pointer-events: auto;

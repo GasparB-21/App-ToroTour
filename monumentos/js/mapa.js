@@ -3,6 +3,8 @@ const START = { lat: 40.965, lng: -5.664 };
 
 // 1) Inicializa el mapa
 const map = L.map('map', { zoomControl: false }).setView(START, 14);
+let userCoords = null;
+const locateBtn = document.getElementById('mapLocate');
 
 // 2) Tiles OSM (para producción valora un proveedor con SLA/token)
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -34,6 +36,8 @@ if (navigator.geolocation){
   navigator.geolocation.getCurrentPosition(
     ({coords}) => {
       const you = [coords.latitude, coords.longitude];
+      userCoords = you;
+      if (locateBtn) locateBtn.disabled = false;
       L.circleMarker(you, {
         radius: 8, color:'#1976ff', fillColor:'#1976ff',
         fillOpacity: 1, weight: 3
@@ -81,6 +85,11 @@ function layoutCustom(){
   });
 }
 layoutCustom();
+
+locateBtn?.addEventListener('click', () => {
+  if (!userCoords) return;
+  map.flyTo(userCoords, 15, { animate: true });
+});
 
 // abrir/cerrar
 function openFab(){
