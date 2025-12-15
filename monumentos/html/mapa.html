@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Monumentos • Mapa</title>
+
+        <!-- CSS compartidos -->
+        <link rel="stylesheet" href="/shared/styles.css" />
+        <link rel="stylesheet" href="/monumentos/styles.css" />
+        <!-- Leaflet (CSS) -->
+        <link
+            rel="stylesheet"
+            href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        />
+    </head>
+    <body>
+
+        <header class="toolbar" aria-label="Cabecera">
+            <form class="searchbar" role="search" action="XXX" method="get" novalidate>
+            <img src="/favorites/img/lupa-removebg-preview.png" class="sb-img" alt="" aria-hidden="true"/>
+            <label for="sb" class="sr-only">Buscar monumentos</label>
+            <input id="sb" name="sb" type="search" placeholder="Buscar monumentos" inputmode="search" />
+            </form>
+
+            <button class="btn-filtros" type="button"
+                    aria-label="Abrir filtros"
+                    aria-haspopup="dialog"
+                    aria-controls="panel-filtros"
+                    aria-expanded="false">
+            <img src="/favorites/img/filter-icon-removebg-preview.png" alt="" aria-hidden="true"/>
+            </button>
+        </header>
+
+        <!-- Contenedor mapa (ocupa todo entre toolbar y tabbar) -->
+        <section id="map" aria-label="Mapa de monumentos"></section>
+
+        <!-- FAB “Mostrar lista” --
+        <button class="fab" type="button">Mostrar lista</button>
+        -->
+
+        <!-- Botón principal -->
+        <div class="cta-wrap">
+            <a class="btn-pill" href="/eventos/html/eventosListado.html" aria-label="Ir a listado de eventos.">
+                Mostrar lista
+            </a>
+        </div>
+
+        <!-- Bottom sheet / card simple --
+        <article class="sheet" aria-live="polite">
+            <h3 class="sheet__title">Catedrales de Salamanca</h3>
+            <p class="sheet__meta"><strong>Monument type:</strong> Cathedrals</p>
+            <a class="sheet__cta" href="#">Ver detalles</a>
+        </article>
+        -->
+
+        <!-- Tabbar (tu include) -->
+        <div data-include="/shared/partials/tabbar.html"></div>
+        <script type="module" src="/shared/js/tabbar.js"></script>
+
+        <!-- Leaflet (JS) -->
+        <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+        <!-- Lógica de mapa de esta vista -->
+        <script type="module" src="/monumentos/js/mapa.js"></script>
+    </body>
+</html>

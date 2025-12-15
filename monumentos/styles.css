@@ -1,5 +1,53 @@
+/* ============= */
+/* Pantalla Mapa */
+/* ============= */
+:root{
+  --z-over: 10;
+}
 
+/* Mapa a pantalla completa entre toolbar y tabbar */
+#map{
+  position: fixed;
+  inset: var(--toolbar-h) 0 var(--tabbar-h) 0;
+}
 
+/* Evita que los controles de Leaflet queden ocultos por toolbar/tabbar */
+.leaflet-top    { top:    calc(var(--toolbar-h) + 8px); }
+.leaflet-bottom { bottom: calc(var(--tabbar-h) + 8px); }
+
+/* FAB centrado sobre la tabbar */
+.fab{
+  position: fixed; z-index: var(--z-over);
+  left: 50%; bottom: calc(var(--tabbar-h) + 12px);
+  transform: translateX(-50%);
+  background:#1976ff; color:#fff; font-weight:800;
+  border:3px solid #fff; outline:2px solid var(--ui-black);
+  padding: 10px 18px; border-radius: 9999px;
+  cursor: pointer;
+}
+
+/* Bottom sheet/card pegada arriba de la tabbar y por encima del FAB */
+.sheet{
+  position: fixed; z-index: var(--z-over);
+  left: 12px; right: 12px;
+  bottom: calc(var(--tabbar-h) + 12px + 56px); /* 56px ≈ alto del FAB */
+  background:#fff; color: var(--ui-black);
+  border: 2px solid var(--ui-black);
+  border-radius: var(--radius, 16px);
+  padding: 12px;
+}
+.sheet__title{ margin: 0 0 6px; font-weight: 800; }
+.sheet__meta{ margin: 0; }
+.sheet__cta{
+  display:inline-block; margin-top:8px;
+  background:#1976ff; color:#fff; text-decoration:none;
+  padding: 8px 12px; border-radius: 12px;
+  border: 2px solid var(--ui-black);
+}
+
+/* ============= */
+/* Pantalla Lista */
+/* ============= */
 #cta-wrap-monumentos{
   position: fixed;
   left: 50%;
