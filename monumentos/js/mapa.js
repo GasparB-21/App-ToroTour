@@ -18,7 +18,7 @@ const POIS = [
 ];
 
 const pin = L.icon({
-  iconUrl: '/favorites/img/pin-black.png', // pon aquí tu pin
+  iconUrl: '/monumentos/img/mapa/pin.png', // pon aquí tu pin
   iconSize: [28, 28],
   iconAnchor: [14, 28]
 });

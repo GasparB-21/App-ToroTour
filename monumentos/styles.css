@@ -11,6 +11,16 @@
   inset: var(--toolbar-h) 0 var(--tabbar-h) 0;
 }
 
+.cta-wrap--map{
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: calc(var(--tabbar-h) + env(safe-area-inset-bottom) + 12px);
+  width: min(640px, calc(100% - 24px));
+  justify-content: center;
+  z-index: var(--z-over);
+}
+
 /* Evita que los controles de Leaflet queden ocultos por toolbar/tabbar */
 .leaflet-top    { top:    calc(var(--toolbar-h) + 8px); }
 .leaflet-bottom { bottom: calc(var(--tabbar-h) + 8px); }
