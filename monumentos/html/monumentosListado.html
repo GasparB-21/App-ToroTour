@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listado de monumentos</title>
+    <link rel="stylesheet" href="/shared/styles.css">
+    <link rel="stylesheet" href="/monumentos/styles.css">
+</head>
+<!DOCTYPE html>
+    <body>
+        <header class="toolbar" aria-label="Cabecera">
+            <!-- Búsqueda independiente -->
+            <form class="searchbar" role="search" action="XXX" method="get" novalidate>
+                <img src="/favorites/img/lupa-removebg-preview.png" class="sb-img" alt="" aria-hidden="true"/>
+                <label for="sb" class="sr-only">Buscar monumentos</label>
+                <input id="sb" name="sb" type="search" placeholder="Buscar monumentos" inputmode="search" />
+            </form>
+
+            <!-- Botón de filtros independiente -->
+            <button class="btn-filtros" type="button"
+                    aria-label="Abrir filtros"
+                    aria-haspopup="dialog"
+                    aria-controls="panel-filtros"
+                    aria-expanded="false">
+                <img src="/favorites/img/filter-icon-removebg-preview.png" alt="" aria-hidden="true"/>
+            </button>
+        </header>
+
+        <main class="content content--listado">
+            <h1>Listado de monumentos</h1>
+
+            <div class="lista-elementos-scroll">
+                <ul class="lista-elementos" id="lista" aria-label="Listado de monumentos">
+                    <!-- Cada <li> contendrá una card con los datos del evento -->
+                </ul>
+            </div>
+
+            <div class="cta-wrap" id="cta-wrap-monumentos">
+                <a class="btn-pill" id="btn-pill-monumentos" href="/monumentos/html/XXX" aria-label="Ir a la vista de calendario">
+                    Mostrar mapa
+                </a>
+            </div>
+        </main>
+
+
+        <div data-include="/shared/partials/tabbar.html"></div>
+        <script type="module" src="/shared/js/tabbar.js"></script>
+        <script type="module" src="/monumentos/js/monumentos.js"></script>
+    </body>
+</html>

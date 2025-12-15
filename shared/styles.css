@@ -1,0 +1,353 @@
+/* ========= */
+/* Variables */
+/* ========= */
+:root{
+  --background-color:#75A9F6;
+  --ui-tabbbar-active: #0A84FF;
+  --progress-color:#2BA74C;
+  --white-color:#FFFFFF;
+  --ui-black: #111;
+  --ui-grey: #9aa1a9;
+
+  --toolbar-h: 72px;   /* Alto cabecera */
+  --tabbar-h: 72px;    /* Alto tabbar */
+  --radius: 12px;
+}
+
+*{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,body{
+  height: 100%
+}
+
+main{
+    background-color: var(--background-color);
+}
+
+/* ======== */
+/* SR-ONLY */
+/* ======= */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ======= */
+/* ToolBar */
+/* ======= */
+.toolbar{
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  background-color: var(--background-color);
+  padding: 15px;
+  gap: 10px;
+  /**/
+  position: fixed;
+  inset: 0 0 auto 0;           /* top:0; left:0; right:0 */
+  height: var(--toolbar-h);
+  z-index: 1000;
+  /* lo demás que ya tienes: display, gap, background... */
+}
+
+.searchbar{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--white-color);
+  border: 2px solid var(--ui-black);
+  border-radius: 9999px;          /* píldora */
+  padding-inline: 14px;
+  height: 44px;                   /* 44–48px funciona bien en móvil */
+  min-width: min(530px, 80vw);
+}
+
+.searchbar input[type="search"]{
+  flex: 1;
+  border: 0;
+  outline: none;
+  background: transparent;
+  font-size: 16px;
+  color: var(--ui-text);
+}
+
+.sb-img{
+  width: 20px;
+  height: 20px;
+}
+
+#sb{
+  background-color: var(--white-color);
+}
+
+.searchbar:focus-within{
+  box-shadow: 0 0 0 3px rgba(255,255,255,.7);
+}
+
+.btn-filtros{
+  width: 44px; height: 44px;
+  display: grid; 
+  place-items: center;
+  border-radius: 50%;
+  background: var(--white-color);
+  border: 2px solid var(--ui-black);
+  cursor: pointer;
+  padding: 6px;
+  line-height: 0;         /* Evita que el texto/emoji estire */
+  box-sizing: border-box; /* Padding y borde dentro del tamaño */
+  inline-size: 48px;
+  block-size: 48px;
+  aspect-ratio: 1 / 1;    /* Garantiza cuadrado aunque cambie algo */
+}
+
+.btn-filtros img{
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;        /* Mantiene proporción sin deformar */
+  pointer-events: none;       /* Click sigue siendo del botón */
+}
+
+
+/* ====== */
+/* TabBar */
+/* ====== */
+.tabbar{
+  background-color: var(--white-color);
+  color: var(--ui-black);
+  font-size: 14px;
+  position: fixed;
+  inset: auto 0 0 0;           /* bottom:0; left:0; right:0 */
+  height: calc(var(--tabbar-h) + env(safe-area-inset-bottom));
+  padding-bottom: env(safe-area-inset-bottom);
+  z-index: 1000;
+}
+
+.tabbar-icon{
+  width: 30px;
+  height: 30px;
+  display: block;
+}
+
+.tabbar ul{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.tabbar ul li{
+  flex: 1;
+  text-align: center;
+}
+
+.tabbar ul li a{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  text-decoration: none;
+  padding: 8px 0;
+}
+
+.tabbar ul li a span{
+  color: var(--ui-black);
+}
+
+#tabbar-label-favorites{
+  font-weight: bold;
+  color: var(--ui-tabbbar-active);
+}
+
+.icon{
+  width:28px; 
+  height:28px;
+  display:inline-block;              /* ← Debe existir caja (IMPRESCINDIBLE) */
+  background-color:#007AFF;
+}
+
+.icon-favoritos{
+  -webkit-mask: url("/favorites/img/tabbar/icon-favoritos.png") no-repeat center / contain;
+          mask: url("/favorites/img/tabbar/icon-favoritos.png") no-repeat center / contain;
+}
+
+/* ================== */
+/* Lista de elementos */
+/* ================== */
+.lista-favoritos,
+.lista-elementos{
+  list-style: none;
+  padding: 10px;
+  display: grid;
+  gap: 2px;
+}
+
+.content{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  padding-top: calc(var(--toolbar-h) + 8px);
+  padding-bottom: calc(var(--tabbar-h) + env(safe-area-inset-bottom) + 8px);
+}
+
+h1{
+  color: var(--white-color);
+}
+
+.content--listado{
+  align-items: stretch;
+  overflow: hidden;
+}
+
+.content--listado h1{
+  text-align: center;
+}
+
+.lista-elementos-scroll{
+  flex: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: calc(var(--tabbar-h) + 110px);
+}
+
+.content--listado .lista-elementos{
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.cta-wrap{
+  display: flex;
+  justify-content: center;
+  margin-top: 6px;
+  margin-bottom: calc(var(--tabbar-h) + 6px);
+}
+
+.btn-pill{
+  appearance: none;
+  cursor: pointer;
+  font-weight: 800;
+  background: var(--ui-tabbbar-active);
+  color: var(--white-color);
+  padding: 10px 18px;
+  border-radius: 9999px;
+  border: 3px solid var(--white-color);
+}
+
+.btn-pill:hover{
+  filter: brightness(1.06);
+}
+
+.btn-pill:focus-visible{
+  outline: 3px solid var(--ui-black);
+  outline-offset: 3px;
+}
+
+/* ===== */
+/* Cards */
+/* ===== */
+.event-card{
+  display: grid;
+  grid-template-columns: 56px 1fr auto;
+  column-gap: 12px;
+  align-items: center;
+  background: var(--white-color);
+  color: var(--ui-black);
+  border: 2px solid var(--ui-black);
+  border-radius: 12px;
+  padding: 10px;
+  min-height: 88px;
+}
+
+.event-media{
+  width: 56px;
+  height: 56px;
+  border-radius: 10px;
+  overflow: hidden;
+  align-self: center;
+}
+
+.event-media img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.event-content{
+  grid-column: 2;
+  min-width: 0;
+  align-self: center;
+}
+
+.event-content h3{
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+}
+
+.event-content p{
+  margin: 3px 0;
+  line-height: 1.2;
+}
+
+.event-content .label{
+  display: block;
+  font-weight: 700;
+  text-decoration: underline;
+  margin: 3px 0 2px;
+}
+
+.event-content p span:not(.label),
+.event-content time{
+  display: block;
+  white-space: nowrap;
+}
+
+.event-actions{
+  grid-column: 3;
+  justify-self: end;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  align-self: center;
+}
+
+.icon-btn,
+.icon-link{
+  width: 40px;
+  height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid transparent;
+  border-radius: 999px;
+  background: transparent;
+  cursor: pointer;
+}
+
+.icon-btn svg,
+.icon-link svg{
+  width: 24px;
+  height: 24px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 2.2;
+}

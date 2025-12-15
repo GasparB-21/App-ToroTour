@@ -1,0 +1,187 @@
+:root{
+    /*Definir aquí variables*/
+    --background-color:#75A9F6;
+    --progress-color:#2BA74C;
+    --white-color:#FFFFFF;
+}
+
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+body{
+    background-color: var(--background-color);
+}
+
+main{
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /*align-items: center;*/
+    align-items: stretch;     /* que los hijos ocupen el ancho del main */
+    text-align: center;
+    gap: 24px;                /* espacio entre bloques */
+    max-width: 560px;          /* límite fijo y centrado */
+    margin-inline: auto;       /* = margen izq/der iguales */
+    padding: 24px;             /* respiración en ambos lados */
+
+
+}
+
+.onboarding-illustration{
+    width: 50%;
+    align-self: center;   /* centra en el eje cruzado */
+    display: block;
+}
+
+.onboarding-illustration2{
+    width: 55%;
+    align-self: center;   /* centra en el eje cruzado */
+    display: block;
+    margin-block-start: 50px;
+}
+
+.onboarding-illustration3{
+    width: 65%;
+    align-self: center;   /* centra en el eje cruzado */
+    display: block;
+    margin-block-start: 30px;
+}
+
+.onboarding-text{
+    margin-block-start: -50px;
+}
+
+.onboarding-text2{
+    margin-block-start: 20px;
+}
+
+.onboarding-text3{
+    margin-block-start: 20px;
+    max-width: 98%;
+}
+
+.subrayado {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+}
+
+.onboarding-img{
+    margin-block-start: -10px;
+}
+
+/*REVISAR*/
+.onboarding-progress {
+    /*width: min(560px, 90%);*/
+    /*max-width: 60%;       --> QUITAR*/
+    height: 35px;
+    background: #eef2f5;
+    border: 1px solid #d9dde3;   /* <<< añade el borde */
+    border-color: #111;
+    border-radius: 999px;
+    box-shadow: inset 0 0 0 1px rgba(0,0,0,.15);
+    overflow: hidden;
+    margin-block-start: 50px;
+
+    width: 70%;
+    align-self: center;
+}
+
+.progress__bar {
+    height: 100%;
+    background: #4caf50;       /* color de progreso */
+    border-radius: inherit;
+    transition: width .3s ease; /* animación al cambiar el % */
+}
+
+.onboarding-actions{
+    /*width: min(560px, 90%);*/
+    width: 100%;
+    display: flex;
+    justify-content: space-between;align-items: center;
+    margin-block-start: 10px;
+}
+
+/****REVISAR****/
+/* Contenedor del enlace como bloque vertical centrado */
+.btn {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    gap: .5rem;
+    text-decoration: none;      /* sin subrayado */
+    font-weight: 700;
+    font-size: 1.05rem;
+}
+
+/* Estilos específicos del botón "Siguiente" */
+.btn-navegacion {
+    color: #fff;                /* color del texto */
+    margin-block-start: 30px;
+}
+
+.btn-siguiente{
+    align-self: flex-end;
+}
+
+.btn-atras{
+    align-self: flex-start;
+}
+
+/* La imagen se convierte en “círculo” con fondo verde */
+.btn-navegacion .onboarding-btn-flecha {
+    width: 72px;                /* diámetro visual del círculo */
+    height: 72px;
+    padding: 16px;              /* espesor del aro alrededor de la flecha */
+    background: #2eaf4a;        /* verde */
+    border: 1px solid #111;     /* borde oscuro como en la imagen */
+    border-radius: 50%;         /* círculo */
+    display: block;
+    object-fit: contain;        /* la flecha se ajusta sin deformarse */
+    box-shadow: 0 0 0 1px rgba(0,0,0,.05); /* suaviza el borde (opcional) */
+
+    transition: transform .15s ease;
+}
+
+.btn-circular{
+    width: 72px; height: 72px;
+    display: grid; place-items: center;
+    background: #fff;              /* <<< fondo blanco */
+    border: 1px solid #111;
+    border-radius: 50%;
+}
+
+.icon-flecha{
+    width: 36px; height: 36px;
+    background: #000;              /* <<< color de la flecha */
+    transform: rotate(180deg);
+    -webkit-mask: url("/onboarding/img/buttons/flechaBlanca-removebg-preview.png") center/contain no-repeat;
+            mask: url("/onboarding/img/buttons/flechaBlanca-removebg-preview.png") center/contain no-repeat;
+}
+
+/* Interacciones accesibles */
+.btn-navegacion:focus-visible {
+    outline: 3px solid #fff;
+    outline-offset: 3px;
+}
+
+.btn-navegacion:hover .onboarding-btn-flecha {
+    transform: scale(1.03);
+}
+

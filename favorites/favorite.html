@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="/shared/styles.css" />
+    <link rel="stylesheet" href="/favorites/styles.css" />
+    <title>Favoritos</title>
+    </head>
+    <body class="screen">
+        <header class="toolbar" aria-label="Cabecera">
+            <!-- Búsqueda independiente -->
+            <form class="searchbar" role="search" action="XXX" method="get" novalidate>
+                <img src="/favorites/img/lupa-removebg-preview.png" class="sb-img" alt="" aria-hidden="true"/>
+                <label for="sb" class="sr-only">Buscar favoritos</label>
+                <input id="sb" name="sb" type="search" placeholder="Buscar favoritos" inputmode="search" />
+            </form>
+
+            <!-- Botón de filtros independiente -->
+            <button class="btn-filtros" type="button"
+                    aria-label="Abrir filtros"
+                    aria-haspopup="dialog"
+                    aria-controls="panel-filtros"
+                    aria-expanded="false">
+                    <img src="/favorites/img/filter-icon-removebg-preview.png" alt="" aria-hidden="true"/>
+            </button>
+        </header>
+
+        <!-- Panel de filtros -->
+        <dialog id="panel-filtros">
+            <form method="dialog">
+            <h2>Filtros</h2>
+            <label>Categoría
+                <select name="categoria">
+                <option value="">Todas</option>
+                <option value="cine">Cine</option>
+                <option value="musica">Música</option>
+                </select>
+            </label>
+            <menu>
+                <button value="cancel">Cancelar</button>
+                <button value="apply">Aplicar</button>
+            </menu>
+            </form>
+        </dialog>
+
+        <main class="content">
+            <h1>Mis favoritos</h1>
+
+            <!-- Tabs de sección -->
+            <nav class="filtro-recursos" aria-label="Secciones">
+            <button class="btn" type="button">Monumentos</button>
+            <button class="btn" type="button" aria-current="page">Eventos</button>
+            </nav>
+
+            <!-- Lista de tarjetas -->
+            <!--EL ARIA LABEL DEBE ACTUALIZARSE CON JS-->
+            <ul class="lista-favoritos" id="lista" aria-label="Lista de eventos favoritos">
+                <!-- Cada <li> contendrá una card con los datos del evento -->
+            </ul>
+        </main>
+        
+        <div data-include="/shared/partials/tabbar.html"></div>
+        <script type="module" src="../shared/js/tabbar.js"></script>
+
+
+
+        <!-- (Opcional) JS mínimo para abrir/cerrar el dialog -->
+         <!--
+        <script>
+            const btn = document.querySelector('.btn-filtros');
+            const dlg = document.getElementById('panel-filtros');
+            btn?.addEventListener('click', () => {
+            if (!dlg.open) dlg.showModal(); else dlg.close();
+            btn.setAttribute('aria-expanded', String(dlg.open));
+            });
+        </script>
+        -->
+
+        <script type="module" src="/favorites/favorite.js"></script>
+    </body>
+</html>

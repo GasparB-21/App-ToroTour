@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendario de eventos</title>
+    <link rel="stylesheet" href="/shared/styles.css">
+    <link rel="stylesheet" href="/eventos/css/styles.css">
+</head>
+<body>
+    <header class="toolbar" aria-label="Cabecera">
+        <!-- Búsqueda independiente -->
+        <form class="searchbar" role="search" action="XXX" method="get" novalidate>
+            <img src="/favorites/img/lupa-removebg-preview.png" class="sb-img" alt="" aria-hidden="true"/>
+            <label for="sb" class="sr-only">Buscar eventos</label>
+            <input id="sb" name="sb" type="search" placeholder="Buscar eventos" inputmode="search" />
+        </form>
+
+        <!-- Botón de filtros independiente -->
+        <button class="btn-filtros" type="button"
+                aria-label="Abrir filtros"
+                aria-haspopup="dialog"
+                aria-controls="panel-filtros"
+                aria-expanded="false">
+                <img src="/favorites/img/filter-icon-removebg-preview.png" alt="" aria-hidden="true"/>
+        </button>
+    </header>
+
+    <main class="wrap">
+        <!-- Barra de mes/año -->
+        <section class="calbar" aria-label="Selector de mes">
+            <h1 class="calbar__title" id="cal-title">Mes 2025</h1>
+            <button class="calbar__btn" id="picker-toggle" aria-expanded="false" aria-controls="picker">
+                ▼
+            </button>
+
+            <!-- Desplegable (oculto hasta pulsar el botón) -->
+            <div class="calbar__picker" id="picker" hidden>
+                <label>
+                    Mes
+                    <select id="sel-month" aria-label="Seleccionar mes"></select>
+                </label>
+                <label>
+                    Año
+                    <select id="sel-year" aria-label="Seleccionar año"></select>
+                </label>
+                <button class="calbar__apply" id="apply">Aplicar</button>
+            </div>
+        </section>
+
+        <!-- Calendario -->
+        <section class="cal" aria-labelledby="cal-title">
+            <div class="cal__week">
+                <span>L</span><span>M</span><span>X</span><span>J</span><span>V</span><span>S</span><span>D</span>
+            </div>
+            <div class="cal__grid" id="cal-grid" role="grid" aria-describedby="cal-title"></div>
+        </section>
+
+        <!-- Card de elemento -->
+        <article class="card item">
+            <header class="card__head">
+                <h3 class="card__title">El precio de la verdad</h3>
+            </header>
+
+            <div class="card__footer">
+                <p class="card__meta">
+                    <span class="label">Categoría:</span> Cine
+                </p>
+                <a class="btn-cta" href="#" aria-label="Ver detalles de «El precio de la verdad»">Ver detalles</a>
+            </div>
+        </article>
+
+        <!-- Botón principal -->
+        <div class="cta-wrap">
+            <a class="btn-pill" href="/eventos/html/eventosListado.html" aria-label="Ir a listado de eventos.">
+                Mostrar lista
+            </a>
+        </div>
+    </main>
+
+    <div data-include="/shared/partials/tabbar.html"></div>
+    <script type="module" src="/shared/js/tabbar.js"></script>
+    
+    <script type="module" src="/eventos/js/calendario.js"></script>
+</body>
+</html>

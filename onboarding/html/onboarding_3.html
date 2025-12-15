@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/onboarding/styles.css">
+        <!--Añadir FONTS si al FINAL-->
+        <title>Onboarding-3</title>
+    </head>
+
+    <body>
+        <!--<div id="splash">
+            <img src="img/logo.png" alt="" class="logo">
+        </div>-->
+
+        <!--Header deberia ir dentro o fuera de main-->
+        <header class="onboarding-header">
+            <!--Esto debería ponerlo y ocultarlo con CSS-->
+            <h1 class="sr-only">
+                Favoritos
+            </h1>
+        </header>
+
+        <main>
+            
+            <!-- Imagen decorativa -->
+            <!--Alt-> vacío pq es una imagen decorativa-->
+            <img
+                src="/onboarding/img/illustrations/estrella_favoritos-removebg-preview.png"
+                alt=""
+                class="onboarding-illustration3"
+            />
+
+            <p class="onboarding-text3">
+                Encuentra tus <span class="subrayado">monumentos</span> y <span class="subrayado">eventos favoritos</span> en la pantalla
+                <strong>Favoritos</strong>.
+            </p>
+
+            <img src="/onboarding/img/tabBar/tabBar_Favoritos.png" alt="Flecha roja señalando al elemento 'Favoritos' de la barra de pestañas." class="onboarding-img">
+
+            <div class="onboarding-progress" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
+                <!--REVISAR: como paso porcentaje-->
+                <div class="progress__bar" style="width: 75%"></div>
+            </div>
+
+            <div class="onboarding-actions">
+                <a href="/onboarding/html/onboarding_2.html" class="btn btn-navegacion btn-atras">
+                    <!--Alt-> vacío pq span ya lo explica-->
+                    <!--<img src="/img/tutoriales/buttons/flechaBlanca-removebg-preview.png" alt="" class="onboarding-btn-flecha" id="btn-flecha-atras">-->
+                    <span class="btn-circular">
+                        <span class="icon-flecha" aria-hidden="true"></span>
+                    </span>
+                    <span>Atrás</span>
+                </a>
+
+                <a href="/onboarding/html/onboarding_4.html" class="btn btn-navegacion btn-siguiente">
+                    <!--Alt-> vacío pq span ya lo explica-->
+                    <img src="/onboarding/img/buttons/flechaBlanca-removebg-preview.png" alt="" class="onboarding-btn-flecha">
+                    <span>Siguiente</span>
+                </a>
+            </div>
+
+        </main>
+    </body>
+</html>

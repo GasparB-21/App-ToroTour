@@ -1,0 +1,252 @@
+/* ===== Layout de página (usa variables del shared) ===== */
+main{
+  background-color: var(--background-color);
+}
+
+body{ outline: 3px solid var(--background-color); }
+
+
+.wrap{
+  max-width: 720px;
+  margin-inline: auto;
+  padding: 12px;
+
+  /* importante para calendarios: que el interior pueda encoger */
+  min-height: calc(100dvh - var(--toolbar-h) - var(--tabbar-h));
+  display: flex;
+  flex-direction: column;
+
+  /* que nada quede tapado por la tabbar */
+  /* tus reglas (max-width, etc.) */
+  padding-top: calc(var(--toolbar-h) + 8px);
+  padding-bottom: calc(var(--tabbar-h) + 4px);
+}
+
+/*REVISAR*/
+.wrap > * + *{ margin-top: 10px; }
+.calbar + .cal{ margin-top: 0; }
+.cal + .card{ margin-top: 12px; }
+
+/* ===== Barra Mes/Año ===== */
+.calbar{
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 8px;
+
+  background: var(--ui-tabbbar-active);
+  color: var(--white-color);
+  border: 2px solid var(--ui-black);
+  border-radius: var(--radius) var(--radius) 0 0;
+  padding: 10px 16px;
+}
+.calbar__title{
+  margin: 0;
+  font-weight: 800;
+  font-size: clamp(18px, 5vw, 28px);
+}
+.calbar__btn{
+  inline-size: 36px; block-size: 36px;
+  border: 2px solid var(--ui-black);
+  border-radius: 8px;
+  background: var(--white-color);
+  color: var(--ui-black);
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* Desplegable (respetando hidden) */
+[hidden]{ display: none !important; }
+.calbar__picker{
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 12px;
+  z-index: 10;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr auto;
+  gap: 8px;
+
+  background: var(--white-color);
+  color: var(--ui-black);
+  border: 2px solid var(--ui-black);
+  border-radius: 10px;
+  padding: 10px;
+}
+.calbar__picker label{ display: grid; gap: 6px; font-size: 12px; }
+.calbar__picker select{
+  height: 34px;
+  border: 2px solid var(--ui-black);
+  border-radius: 8px;
+  padding: 0 8px;
+}
+.calbar__apply{
+  height: 34px; align-self: end;
+  border: 2px solid var(--ui-black);
+  border-radius: 8px;
+  background: var(--ui-tabbbar-active);
+  color: var(--white-color);
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* ===== Calendario (encaja en el alto disponible) ===== */
+.cal{
+  display: flex;
+  flex-direction: column;
+  min-height: 0;                       /* clave para que pueda encoger */
+  background: var(--white-color);
+  border: 2px solid var(--ui-black);
+  border-top: 0;
+  border-radius: 0 0 var(--radius) var(--radius);
+  overflow: hidden;
+}
+
+.cal__week{
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  text-align: center;
+  font-weight: 800;
+  padding: 8px 0;
+  border-bottom: 1px solid #e7e7e7;
+}
+
+.cal__grid{
+  flex: 1;                 /* ocupa el espacio restante del .cal */
+  min-height: 0;           /* permite encoger sin desbordar */
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-auto-rows: 1fr;
+}
+
+.cal__cell{
+  background: #f9f9f9;
+  border-right: 1px solid #e7e7e7;
+  border-bottom: 1px solid #e7e7e7;
+  padding: 14px 12px;
+  min-height: 80px;
+}
+.cal__cell:nth-child(7n){ border-right: 0; }
+.cal__cell:nth-last-child(-n+7){ border-bottom: 0; }
+.cal__num{ margin: 0; font-weight: 600; font-size: 20px; }
+.cal__cell--blank .cal__num{ color: var(--ui-grey); }
+
+/* ===== CTA y Card “pegadas” a la tabbar ===== */
+.cta-wrap{
+  display: flex;
+  justify-content: center;
+  margin-top: 6px;
+  margin-bottom: calc(var(--tabbar-h) + 6px);
+}
+.btn-pill{
+  appearance: none; cursor: pointer; font-weight: 800;
+  background: var(--ui-tabbbar-active); color: var(--white-color);
+  padding: 10px 18px; border-radius: 9999px;
+  border: 3px solid var(--white-color);
+}
+.btn-pill:hover{ filter: brightness(1.06); }
+.btn-pill:focus-visible{ outline: 3px solid var(--ui-black); outline-offset: 3px; }
+
+.card{
+  background: var(--white-color);
+  color: var(--ui-black);
+  border: 2px solid var(--ui-black);
+  border-radius: 22px;
+  padding: 11px;
+  margin: 0;
+
+  /* efecto “sale desde abajo” pero respetando la tabbar */
+  position: sticky;
+  bottom: calc(var(--tabbar-h) + 6px);
+}
+.card__head{ margin-bottom: 8px; }
+.card__title{ margin: 0; font-size: 1.3rem; font-weight: 800; line-height: 1.2; }
+.card__footer{
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.btn-cta{
+  display: inline-flex; align-items: center; justify-content: center;
+  min-inline-size: 116px;
+  padding: 8px 12px;
+  background: var(--ui-tabbbar-active); color: var(--white-color); font-weight: 800; text-decoration: none;
+  border-radius: 12px;
+  border: 2px solid var(--ui-black);
+  box-shadow: inset 0 0 0 2px var(--white-color);
+}
+.btn-cta:hover{ filter: brightness(1.05); }
+.card__meta{
+  margin: 0;
+  font-size: 1rem;
+  flex: 1;
+}
+.card__meta .label{ text-decoration: underline; font-weight: 600; }
+
+/* compacto en móviles muy estrechos 
+@media (max-width: 380px){
+  .cal__num{ font-size: 18px; }
+  .card__title{ font-size: 1.2rem; }
+}
+*/
+
+/* ====================== */
+/*Pantalla listado eventos*/
+/* ====================== */
+
+/* Debería ponerlo en shared o separado?? */
+.content{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  overflow: auto;                /* <- Scroll solo en main */
+  -webkit-overflow-scrolling: touch;
+
+  /*REPASAR*/
+  /* >>> reserva espacio para las barras fijas <<< */
+  padding-top: calc(var(--toolbar-h) + 8px);
+  padding-bottom: calc(var(--tabbar-h) + env(safe-area-inset-bottom) + 8px);
+}
+
+h1{
+  color: var(--white-color)
+}
+
+.content--listado{
+  align-items: stretch;
+  overflow: hidden;
+}
+
+.content--listado h1{
+  text-align: center;
+}
+
+.lista-elementos-scroll{
+  flex: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: calc(var(--tabbar-h) + 110px);
+}
+
+.content--listado .lista-eventos{
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+#cta-wrap-eventos{
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: calc(env(safe-area-inset-bottom) + 15px);
+  width: min(640px, calc(100% - 24px));
+  justify-content: center;
+  z-index: 900;
+}
+
+#btn-pill-eventos{
+  border-color: transparent;
+  text-decoration: none;
+}

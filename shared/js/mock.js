@@ -1,0 +1,35 @@
+const IMG = "/favorites/img/imagenEvento.png";
+
+export const FAVORITES_MOCK_MIN = [
+  { id:"mon-001", type:"monumento", title:"Puerta de Alcalá", location:"Madrid",
+    image: IMG,
+    short:"Arco neoclásico emblemático en el centro.", isFavorite:true },
+  { id:"mon-002", type:"monumento", title:"La Giralda", location:"Sevilla",
+    image: IMG,
+    short:"Antiguo alminar y campanario de la catedral.", isFavorite:true },
+  { id:"mon-003", type:"monumento", title:"Sagrada Familia", location:"Barcelona",
+    image: IMG,
+    short:"Basílica modernista de Gaudí, aún en construcción.", isFavorite:false },
+  { id:"mon-004", type:"monumento", title:"Acueducto de Segovia", location:"Segovia",
+    image: IMG,
+    short:"Imponente acueducto romano de sillares graníticos.", isFavorite:true },
+  { id:"mon-005", type:"monumento", title:"Alcázar de Toledo", location:"Toledo",
+    image: IMG,
+    short:"Fortaleza en lo alto de la ciudad histórica.", isFavorite:false },
+
+  { id:"evt-101", type:"evento", title:"Fiesta del Pueblo", date:"2026-01-15", time:"19:00",
+    location:"Plaza Mayor, Madrid", image: IMG,
+    short:"Música en vivo y gastronomía local.", isFavorite:true },
+  { id:"evt-102", type:"evento", title:"Expo Arte Contemporáneo", date:"2026-02-02", time:"12:00",
+    location:"Museo Central, Madrid", image: IMG,
+    short:"Artistas emergentes y propuestas vanguardistas.", isFavorite:false },
+  { id:"evt-103", type:"evento", title:"Concierto Sinfónico", date:"2026-03-10", time:"20:30",
+    location:"Auditorio Estatal, Sevilla", image: IMG,
+    short:"Repertorio romántico con orquesta completa.", isFavorite:true },
+  { id:"evt-104", type:"evento", title:"Feria Gastronómica", date:"2026-04-05", time:"11:00",
+    location:"Recinto Ferial, Valencia", image: IMG,
+    short:"Degustaciones y showcookings durante todo el día.", isFavorite:false },
+  { id:"evt-105", type:"evento", title:"Ruta de Museos Nocturna", date:"2026-05-18", time:"22:00",
+    location:"Centro Histórico, Granada", image: IMG,
+    short:"Visitas guiadas nocturnas a varios museos.", isFavorite:true }
+];

@@ -1,0 +1,121 @@
+// Meses y estado inicial (diciembre 2025 como en tu captura)
+const MONTHS = ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"];
+let state = { y: 2025, m: 11 }; // 0..11
+
+// DOM
+const $title = document.getElementById("cal-title");
+const $grid  = document.getElementById("cal-grid");
+const $picker = document.getElementById("picker");
+const $toggle = document.getElementById("picker-toggle");
+const $selMonth = document.getElementById("sel-month");
+const $selYear  = document.getElementById("sel-year");
+const $apply    = document.getElementById("apply");
+
+// Utilidades
+const pad = n => n.toString().padStart(2,"0");
+const daysInMonth = (y,m) => new Date(y, m+1, 0).getDate();
+const mondayFirstIndex = jsDay => (jsDay + 6) % 7;  // 0=L … 6=D
+const fill = (n, fn) => Array.from({length:n}, (_,i)=>fn(i));
+
+// Rellenar selects del picker
+function setupPicker(){
+  // meses
+  MONTHS.forEach((name,i)=>{
+    const opt = document.createElement("option");
+    opt.value = i; opt.textContent = name;
+    if (i === state.m) opt.selected = true;
+    $selMonth.appendChild(opt);
+  });
+  // años (rango simple)
+  const start = 2020, end = 2030;
+  for (let y=start; y<=end; y++){
+    const opt = document.createElement("option");
+    opt.value = y; opt.textContent = y;
+    if (y === state.y) opt.selected = true;
+    $selYear.appendChild(opt);
+  }
+}
+
+// Render del calendario sin eventos
+function render(){
+  const {y,m} = state;
+  $title.textContent = `${MONTHS[m]} ${y}`;
+
+  $grid.innerHTML = "";
+  const first = new Date(y, m, 1);
+  const blanksBefore = mondayFirstIndex(first.getDay());
+  const total = daysInMonth(y, m);
+  const totalCells = 42; // 7x6
+
+  // Celdas vacías anteriores
+  fill(blanksBefore, () => {
+    const cell = document.createElement("div");
+    cell.className = "cal__cell cal__cell--blank";
+    cell.innerHTML = `<p class="cal__num"></p>`;
+    $grid.appendChild(cell);
+  });
+
+  // Días del mes
+  fill(total, (i) => {
+    const d = i+1;
+    const cell = document.createElement("div");
+    cell.className = "cal__cell";
+    cell.innerHTML = `<p class="cal__num">${d}</p>`;
+    cell.setAttribute("role","gridcell");
+    cell.setAttribute("aria-label", `${d} de ${MONTHS[m]} de ${y}`);
+    $grid.appendChild(cell);
+  });
+
+  // Celdas vacías posteriores
+  const after = totalCells - (blanksBefore + total);
+  fill(after, () => {
+    const cell = document.createElement("div");
+    cell.className = "cal__cell cal__cell--blank";
+    cell.innerHTML = `<p class="cal__num"></p>`;
+    $grid.appendChild(cell);
+  });
+}
+
+// Toggle del picker
+$toggle.addEventListener("click", () => {
+  const isOpen = !$picker.hasAttribute("hidden");
+  if (isOpen){
+    $picker.setAttribute("hidden", "");
+    $toggle.setAttribute("aria-expanded","false");
+  } else {
+    $picker.removeAttribute("hidden");
+    $toggle.setAttribute("aria-expanded","true");
+  }
+});
+
+// Aplicar selección
+$apply.addEventListener("click", () => {
+  /*
+  state.m = parseInt($selMonth.value, 10);
+  state.y = parseInt($selYear.value, 10);
+  render();
+  */
+  $picker.setAttribute("hidden", "");
+  $toggle.setAttribute("aria-expanded","false");
+});
+
+
+/*REVISAR*/
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") {
+    picker.setAttribute("hidden", "");
+    toggle.setAttribute("aria-expanded", "false");
+  }
+});
+
+document.addEventListener("click", (e) => {
+  const open = !picker.hasAttribute("hidden");
+  if (open && !picker.contains(e.target) && !toggle.contains(e.target)) {
+    picker.setAttribute("hidden", "");
+    toggle.setAttribute("aria-expanded", "false");
+  }
+});
+
+// Init
+setupPicker();
+render();
