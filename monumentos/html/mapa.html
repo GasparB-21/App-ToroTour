@@ -35,16 +35,35 @@
         <!-- Contenedor mapa (ocupa todo entre toolbar y tabbar) -->
         <section id="map" aria-label="Mapa de monumentos"></section>
 
-        <!-- FAB “Mostrar lista” --
-        <button class="fab" type="button">Mostrar lista</button>
-        -->
+        <!-- Botón accesibilidad mapa --> 
+        <div class="map-fab" id="mapFab" aria-label="Controles de mapa">
+            <!-- Botón principal -->
+            <button class="map-fab__main" id="fabToggle" type="button"
+                    aria-haspopup="true" aria-expanded="false" aria-controls="fabActions"
+                    title="Controles de mapa">
+                ⛶
+            </button>
 
-        <!-- Botón principal -->
+            <!-- Grupo de acciones (se expande/colapsa) -->
+            <div class="map-fab__actions" id="fabActions" hidden>
+                <!-- Siete acciones en círculo: arriba, derecha, abajo, izquierda, zoom+, zoom-, ajustar -->
+                <button class="map-fab__btn" data-action="pan-up"     title="Mover arriba"    aria-label="Mover mapa arriba">↑</button>
+                <button class="map-fab__btn" data-action="zoom-in"    title="Acercar"         aria-label="Acercar">＋</button>
+                <button class="map-fab__btn" data-action="pan-right"  title="Mover derecha"   aria-label="Mover mapa a la derecha">→</button>
+                <button class="map-fab__btn" data-action="fit"        title="Ajustar a marcadores" aria-label="Ajustar a marcadores">⤢</button>
+                <button class="map-fab__btn" data-action="pan-down"   title="Mover abajo"     aria-label="Mover mapa abajo">↓</button>
+                <button class="map-fab__btn" data-action="zoom-out"   title="Alejar"          aria-label="Alejar">－</button>
+                <button class="map-fab__btn" data-action="pan-left"   title="Mover izquierda" aria-label="Mover mapa a la izquierda">←</button>
+            </div>
+        </div>        
+
+        <!-- Botón lista --
         <div class="cta-wrap cta-wrap--map">
             <a class="btn-pill" href="/monumentos/html/monumentosListado.html" aria-label="Ir al listado de monumentos.">
                 Mostrar lista
             </a>
         </div>
+        -->
 
         <!-- Bottom sheet / card simple --
         <article class="sheet" aria-live="polite">

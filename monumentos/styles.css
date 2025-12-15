@@ -25,35 +25,73 @@
 .leaflet-top    { top:    calc(var(--toolbar-h) + 8px); }
 .leaflet-bottom { bottom: calc(var(--tabbar-h) + 8px); }
 
-/* FAB centrado sobre la tabbar */
-.fab{
-  position: fixed; z-index: var(--z-over);
-  left: 50%; bottom: calc(var(--tabbar-h) + 12px);
-  transform: translateX(-50%);
-  background:#1976ff; color:#fff; font-weight:800;
-  border:3px solid #fff; outline:2px solid var(--ui-black);
-  padding: 10px 18px; border-radius: 9999px;
+/* =================== */
+/* Botón accesibilidad */
+/* =================== */
+.map-fab{
+  position: fixed;
+  right: 14px;
+  bottom: calc(var(--tabbar-h) + 85px);
+  z-index: 1000;
+}
+
+.map-fab__main{
+  inline-size: 56px; 
+  block-size: 56px;
+  border-radius: 50%;
+  border: 2px solid var(--ui-black);
+  background: var(--white-color);
+  font-size: 20px; font-weight: 700;
+  display: grid; place-items: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,.2);
   cursor: pointer;
 }
 
-/* Bottom sheet/card pegada arriba de la tabbar y por encima del FAB */
-.sheet{
-  position: fixed; z-index: var(--z-over);
-  left: 12px; right: 12px;
-  bottom: calc(var(--tabbar-h) + 12px + 56px); /* 56px ≈ alto del FAB */
-  background:#fff; color: var(--ui-black);
+.map-fab__btn{
+  position: absolute;
+  inline-size: 52px; 
+  block-size: 52px;
+  border-radius: 50%;
   border: 2px solid var(--ui-black);
-  border-radius: var(--radius, 16px);
-  padding: 12px;
+  background: var(--white-color);
+  display: grid; 
+  place-items: center;
+  font-size: 20px; 
+  font-weight: 700;
+
+  box-shadow: 0 2px 6px rgba(0,0,0,.18);
+  transition: transform .18s ease;
 }
-.sheet__title{ margin: 0 0 6px; font-weight: 800; }
-.sheet__meta{ margin: 0; }
-.sheet__cta{
-  display:inline-block; margin-top:8px;
-  background:#1976ff; color:#fff; text-decoration:none;
-  padding: 8px 12px; border-radius: 12px;
-  border: 2px solid var(--ui-black);
+
+.map-fab--open .map-fab__btn{
+  opacity: 1;
+  pointer-events: auto;
 }
+
+.map-fab--open .map-fab__actions .map-fab__btn{
+  transform: translate(var(--tx,0), var(--ty,0));
+}
+
+.map-fab__actions .map-fab__btn{
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+
+/* El propio toggle se queda en el origen del grupo */
+.map-fab__toggle{
+  position: relative;
+  z-index: 1;
+}
+
+.cta-wrap--map{
+  position: fixed;
+  left: 50%;
+  bottom: calc(var(--tabbar-h) + 100px);
+  transform: translateX(-50%);
+  z-index: 1000;
+}
+
 
 /* ============= */
 /* Pantalla Lista */
@@ -72,3 +110,30 @@
   border-color: transparent;
   text-decoration: none;
 }
+
+/* =================== */
+/* Botón accesibilidad */
+/* =================== */
+/* Bottom sheet/card pegada arriba de la tabbar y por encima del FAB */
+/*
+.sheet{
+  position: fixed; 
+  z-index: var(--z-over);
+  left: 12px; 
+  right: 12px;
+  bottom: calc(var(--tabbar-h) + 12px + 56px); /* 56px ≈ alto del FAB /
+  background:#fff; 
+  color: var(--ui-black);
+  border: 2px solid var(--ui-black);
+  border-radius: var(--radius, 16px);
+  padding: 12px;
+}
+.sheet__title{ margin: 0 0 6px; font-weight: 800; }
+.sheet__meta{ margin: 0; }
+.sheet__cta{
+  display:inline-block; margin-top:8px;
+  background:#1976ff; color:#fff; text-decoration:none;
+  padding: 8px 12px; border-radius: 12px;
+  border: 2px solid var(--ui-black);
+}
+*/

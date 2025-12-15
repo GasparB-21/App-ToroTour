@@ -52,3 +52,86 @@ function updateSheet(poi){
     `<strong>Monument type:</strong> ${poi.type}`;
   // puedes actualizar href del CTA, etc.
 }
+
+/* =================== */
+/* Botón accesibilidad */
+/* =================== */
+const fab     = document.getElementById('mapFab');
+const toggle  = document.getElementById('fabToggle');
+const actions = document.getElementById('fabActions');
+const buttons = [...actions.querySelectorAll('.map-fab__btn')];
+
+// posiciones personalizadas para el layout en columnas
+const FAB_LAYOUT = {
+  'pan-left':  { x: -144, y:   0 },
+  'pan-up':    { x:  -72, y: -72 },
+  'pan-down':  { x:  -72, y:  72 },
+  'zoom-in':   { x:    0, y: -72 },
+  'zoom-out':  { x:    0, y:  72 },
+  'pan-right': { x:   -72, y:   0 },
+  'fit':       { x:   72, y:  72 },
+};
+
+function layoutCustom(){
+  buttons.forEach(btn => {
+    const pos = FAB_LAYOUT[btn.dataset.action];
+    if (!pos) return;
+    btn.style.setProperty('--tx', `${pos.x}px`);
+    btn.style.setProperty('--ty', `${pos.y}px`);
+  });
+}
+layoutCustom();
+
+// abrir/cerrar
+function openFab(){
+  fab.classList.add('map-fab--open');
+  actions.hidden = false;
+  toggle.setAttribute('aria-expanded','true');
+}
+function closeFab(){
+  fab.classList.remove('map-fab--open');
+  // espera a que termine la animación para ocultar y no “salte”
+  setTimeout(()=>{ actions.hidden = true; }, 180);
+  toggle.setAttribute('aria-expanded','false');
+}
+toggle.addEventListener('click', () => {
+  if (fab.classList.contains('map-fab--open')) {
+    closeFab();
+  } else {
+    openFab();
+  }
+});
+
+// cierra si haces clic fuera o pulsas ESC
+document.addEventListener('click', (e) => {
+  if (!fab.contains(e.target)) closeFab();
+});
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') closeFab();
+});
+
+/* ========= Acciones del mapa ========= */
+
+function fitMarkers(){
+  if (!POIS?.length) return;
+  const bounds = L.latLngBounds(POIS.map(p => p.coords));
+  map.fitBounds(bounds, { padding: [40,40] });
+}
+
+function pan(dx, dy){ map.panBy([dx, dy], { animate:true }); }
+
+actions.addEventListener('click', (e) => {
+  const btn = e.target.closest('.map-fab__btn');
+  if (!btn) return;
+  const act = btn.dataset.action;
+
+  switch(act){
+    case 'zoom-in':    map.zoomIn(); break;
+    case 'zoom-out':   map.zoomOut(); break;
+    case 'fit':        fitMarkers(); closeFab(); break;
+    case 'pan-up':     pan(0, -120); break;
+    case 'pan-down':   pan(0, 120);  break;
+    case 'pan-left':   pan(-120, 0); break;
+    case 'pan-right':  pan(120, 0);  break;
+  }
+});
